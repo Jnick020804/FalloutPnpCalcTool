@@ -41,7 +41,11 @@ namespace FalloutPnpCalcTool
                 Beast b = new Beast();
                 Task t1 = Task.Run(async () => { b = await App.Database.GetBeastAsync(id.Value); });
                 t1.Wait();
+                List<Attack> pws = new List<Attack>();
+                Task t2 = Task.Run(async () => { pws = await App.Database.GetAttacksForBeastAsync(id.Value); });
+                t2.Wait();
                 this.Beast = b;
+                this.Beast.Attacks = pws;
                 SetValuesFromBeast(this.Beast);
                 SetUIFromValues();
 
@@ -78,6 +82,42 @@ namespace FalloutPnpCalcTool
             this.PerceptionBox.Text = this.Perception.ToString();
             this.NameBox.Text = this.BName;
             this.ArmorClassBox.Text = this.ArmorClass.ToString();
+
+            StackPanel s = new StackPanel();
+            foreach (Attack w in Beast.Attacks)
+            {
+                Grid g = new Grid();
+                g.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                g.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+
+                Label weaponName = new Label();
+                weaponName.HorizontalAlignment = HorizontalAlignment.Center;
+                weaponName.VerticalAlignment = VerticalAlignment.Center;
+                weaponName.Content = w.Name;
+
+                Grid.SetColumn(weaponName, 0);
+                g.Children.Add(weaponName);
+
+                Button deleteButton = new Button();
+                deleteButton.Content = "Delete";
+                deleteButton.CommandParameter = w.ID;
+                deleteButton.Click += DeleteButton_Click;
+
+                Grid.SetColumn(deleteButton, 1);
+                g.Children.Add(deleteButton);
+
+                s.Children.Add(g);
+            }
+            this.WeaponsList.Content = s;
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button s = (Button)sender;
+            Guid id = (Guid)s.CommandParameter;
+            int res = App.Database.DeleteBeastAttack(id);
+            Beast.Attacks.Remove(Beast.Attacks.FirstOrDefault(w => w.ID == id));
+            SetUIFromValues();
         }
 
         private void SetValuesFromBeast(Beast beast)
@@ -113,10 +153,32 @@ namespace FalloutPnpCalcTool
 
         private void AddWeapon_Click(object sender, RoutedEventArgs e)
         {
+            Attack w = (Attack)this.WeaponDropdown.SelectedItem;
+            if (this.Beast.ID != Guid.Empty)
+            {
+                BeastAttack pw = new BeastAttack();
+                pw.ID = Guid.NewGuid();
+                pw.BeastID = Beast.ID;
+                pw.AttackID = w.ID;
+                int res = App.Database.SaveBeastAttack(pw);
+            }
+            else
+            {
+                SaveBeast();
+                BeastAttack pw = new BeastAttack();
+                pw.ID = Guid.NewGuid();
+                pw.BeastID = Beast.ID;
+                pw.AttackID = w.ID;
+                int res = App.Database.SaveBeastAttack(pw);
+            }
 
+            Beast.Attacks.Add(w);
+            SetValuesFromBeast(this.Beast);
+
+            SetUIFromValues();
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        public void SaveBeast()
         {
             SetValuesFromUI();
             SetBeastFromValues();
@@ -125,6 +187,11 @@ namespace FalloutPnpCalcTool
                 this.Beast.ID = Guid.NewGuid();
             }
             int res = App.Database.SaveBeast(this.Beast);
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveBeast();
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)

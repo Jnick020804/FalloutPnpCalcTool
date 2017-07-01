@@ -60,6 +60,11 @@ namespace FalloutPnpCalcTool.Models
             return database.Table<Attack>().ToListAsync();
         }
 
+        public Task<Attack> GetAttackAsync(Guid id)
+        {
+            return database.Table<Attack>().Where(a => a.ID == id).FirstOrDefaultAsync();
+        }
+
         public async Task<List<Weapon>> GetWeaponsForCharacterAsync(Guid id)
         {
             var playerWeapons = await database.Table<PlayerWeapon>().Where(t => t.CharacterID == id).ToListAsync();
@@ -73,7 +78,9 @@ namespace FalloutPnpCalcTool.Models
         {
             var beastAttacks = await database.Table<BeastAttack>().Where(t => t.BeastID == id).ToListAsync();
 
-            return await database.Table<Attack>().Where(t => beastAttacks.Any(l => l.AttackID == t.ID)).ToListAsync();
+            List<Attack> a = await database.Table<Attack>().ToListAsync();
+
+            return a.Where(ba => beastAttacks.Any(b => b.AttackID == ba.ID)).ToList();
         }
 
         public int SaveCharacter(Character c)
@@ -229,10 +236,12 @@ namespace FalloutPnpCalcTool.Models
                     {
                         continue;
                     }
+                    UpdateAttacks();
                     return inserted;
                 }
                 else
                 {
+                    UpdateAttacks();
                     return updated;
                 }
 
@@ -241,6 +250,17 @@ namespace FalloutPnpCalcTool.Models
             {
                 return -1;
             }
+        }
+
+        private void UpdateAttacks()
+        {
+            List<Attack> a = new List<Attack>();
+
+            Task t1 = Task.Run(async () => { a = await GetAttacksAsync(); });
+            t1.Wait();
+
+            App.Attacks = a;
+            App.AttackDate = DateTime.Now;
         }
 
         public int SaveWeapon(Weapon w)
@@ -418,6 +438,7 @@ namespace FalloutPnpCalcTool.Models
                 return -1;
             }
         }
+
         public int DeleteBeast(Guid b)
         {
             try
@@ -448,6 +469,26 @@ namespace FalloutPnpCalcTool.Models
                 {
                     continue;
                 }
+                UpdateAttacks();
+                return deleted.Count;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
+
+        public int DeleteAttack(Guid a)
+        {
+            try
+            {
+                List<Attack> deleted = new List<Attack>();
+                Task t1 = Task.Run(async () => { deleted = await database.QueryAsync<Attack>("Delete from Attack Where ID = ?", a); });
+                while (!t1.IsCompleted)
+                {
+                    continue;
+                }
+                UpdateAttacks();
                 return deleted.Count;
             }
             catch (Exception ex)
@@ -548,6 +589,25 @@ namespace FalloutPnpCalcTool.Models
             }
 
         }
+
+        public int DeleteBeastAttack(Guid ba)
+        {
+            try
+            {
+                List<BeastAttack> deleted = new List<BeastAttack>();
+                Task t1 = Task.Run(async () => { deleted = await database.QueryAsync<BeastAttack>("Delete from BeastAttack Where AttackID = ?", ba); });
+                while (!t1.IsCompleted)
+                {
+                    continue;
+                }
+                return deleted.Count;
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+
+        }
     }
     public enum GoverningSkill
     {
@@ -612,7 +672,7 @@ namespace FalloutPnpCalcTool.Models
         public int ArmorClass { get; set; }
         public string Name { get; set; }
         [Ignore]
-        public List<BeastAttack> Attacks { get; set; }
+        public List<Attack> Attacks { get; set; }
     }
 
     public class BeastAttack

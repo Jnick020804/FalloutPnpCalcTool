@@ -293,7 +293,7 @@ namespace FalloutPnpCalcTool
                 Button editButton = new Button();
                 editButton.Content = "Edit";
                 editButton.CommandParameter = w.ID;
-                editButton.Click += EditWeaponButton_Click;
+                editButton.Click += EditAttackButton_Click;
 
                 Grid.SetColumn(editButton, 1);
                 g.Children.Add(editButton);
@@ -301,7 +301,7 @@ namespace FalloutPnpCalcTool
                 Button deleteButton = new Button();
                 deleteButton.Content = "Delete";
                 deleteButton.CommandParameter = w.ID;
-                deleteButton.Click += DeleteWeaponButton_Click;
+                deleteButton.Click += DeleteAttackButton_Click;
 
                 Grid.SetColumn(deleteButton, 2);
                 g.Children.Add(deleteButton);
@@ -310,6 +310,23 @@ namespace FalloutPnpCalcTool
             }
 
             this.AttacksView.Content = s;
+        }
+
+        private void DeleteAttackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            Guid id = (Guid)b.CommandParameter;
+            int res = App.Database.DeleteAttack(id);
+            this.Attacks.Remove(this.Attacks.FirstOrDefault(w => w.ID == id));
+            SetAttacksView();
+        }
+
+        private void EditAttackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            Guid id = (Guid)b.CommandParameter;
+            Window w = new AddAttack(id);
+            w.Show();
         }
 
         private void AddWeaponButton_Click(object sender, RoutedEventArgs e)
@@ -332,7 +349,8 @@ namespace FalloutPnpCalcTool
 
         private void AddAttackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Window w = new AddAttack();
+            w.Show();
         }
 
         private void OpenCalcButton_Click(object sender, RoutedEventArgs e)

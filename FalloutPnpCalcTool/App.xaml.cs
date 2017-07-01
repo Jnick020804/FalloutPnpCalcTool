@@ -80,6 +80,16 @@ namespace FalloutPnpCalcTool
 
                 Beings.Add(cb);
             }
+
+            foreach(var item in b)
+            {
+                CompositeBeing cb = new CompositeBeing();
+                cb.Name = item.Name;
+                cb.Type = item.GetType();
+                cb.Object = item;
+
+                Beings.Add(cb);
+            }
             BeingDate = DateTime.Now;
         }
     }

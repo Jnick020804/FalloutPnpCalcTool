@@ -456,6 +456,13 @@ namespace FalloutPnpCalcTool
                 Beast b = (Beast)cb.Object;
                 SetName();
                 UpdateUI(ReturnInstance());
+                List<Attack> w = new List<Attack>();
+                Task t1 = Task.Run(async () => { w = await App.Database.GetAttacksForBeastAsync(b.ID); });
+                t1.Wait();
+                this.WeaponsChanging = true;
+                this.AttackWithDropDown.ItemsSource = w;
+                this.AttackWithDropDown.DisplayMemberPath = "Name";
+                this.WeaponsChanging = false;
             }
         }
 
@@ -560,12 +567,18 @@ namespace FalloutPnpCalcTool
 
                     this.WeaponRange = w.RangeFeet;
 
-                    UpdateUI(ReturnInstance());
+                   
                 }
                 else
                 {
+                    ComboBox c = (ComboBox)sender;
+                    Attack w = (Attack)c.SelectedItem;
+                    this.BaseSkill = w.HitChance;
+
 
                 }
+
+                UpdateUI(ReturnInstance());
             }
         }
     }
