@@ -1,0 +1,47 @@
+﻿<Window x:Class="FalloutPnpCalcTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FalloutPnpCalcTool"
+        mc:Ignorable="d"
+        Title="Fallout PnP Battle Tool">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" x:Name="AddCharacterButton" Click="AddCharacterButton_Click" Height="30" VerticalAlignment="Top">Add Character</Button>
+            <Button Grid.Row="0" Grid.Column="1" x:Name="AddBeastButton" Click="AddBeastButton_Click" Height="30" VerticalAlignment="Top">Add Beast</Button>
+            <Button Grid.Row="0" Grid.Column="2" x:Name="AddWeaponButton" Click="AddWeaponButton_Click" Height="30" VerticalAlignment="Top">Add Weapon</Button>
+            <Button Grid.Row="0" Grid.Column="3" x:Name="AddAttackButton" Click="AddAttackButton_Click" Height="30" VerticalAlignment="Top">Add Attack</Button>
+            <Button Grid.Row="0" Grid.Column="4" x:Name="OpenCalcButton" Click="OpenCalcButton_Click" Height="30" VerticalAlignment="Top">Open Calculator</Button>
+        </Grid>
+        <Label Grid.Row="1" FontSize="20" Grid.Column="0">Characters</Label>
+        <ScrollViewer x:Name="CharactersView" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="0"></ScrollViewer>
+        <Label Grid.Row="1" FontSize="20" Grid.Column="1">Weapons</Label>
+        <ScrollViewer x:Name="WeaponsView" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="1"></ScrollViewer>
+        <Label Grid.Row="3" FontSize="20" Grid.Column="0">Beasts</Label>
+        <ScrollViewer x:Name="BeastsView" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="0"></ScrollViewer>
+        <Label Grid.Row="3" FontSize="20" Grid.Column="1">Attacks</Label>
+        <ScrollViewer x:Name="AttacksView" HorizontalAlignment="Stretch" Grid.Row="4" Grid.Column="1"></ScrollViewer>
+    </Grid>
+</Window>

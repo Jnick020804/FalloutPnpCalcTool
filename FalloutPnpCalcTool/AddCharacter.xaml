@@ -1,0 +1,111 @@
+﻿<Window x:Class="FalloutPnpCalcTool.AddCharacter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FalloutPnpCalcTool"
+        mc:Ignorable="d"
+        Title="Add Character">
+    <Grid x:Name="layoutGrid" Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="NameGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Name</Label>
+                    <TextBox x:Name="NameBox" Grid.Row="0" Grid.Column="1" Height="30" Text=""></TextBox>
+                </Grid>
+                <Grid x:Name="PerceptionArmorClass" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="PerceptionLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Perception</Label>
+                    <TextBox x:Name="PerceptionBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Height="30" Text=""></TextBox>
+                    <Label x:Name="ArmorClassLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Armor Class</Label>
+                    <TextBox x:Name="ArmorClassBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="3" Height="30" Text=""></TextBox>
+                </Grid>
+                <Grid x:Name="Skills" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="SmallGunsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Small Guns</Label>
+                    <TextBox x:Name="SmallGunsBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Height="30" Text=""></TextBox>
+                    <Label x:Name="BigGunsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Big Guns</Label>
+                    <TextBox x:Name="BigGunsBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="3" Height="30" Text=""></TextBox>
+                    <Label x:Name="EnergyWeaponsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4">Energy Weapons</Label>
+                    <TextBox x:Name="EnergyWeaponsBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="5" Height="30" Text=""></TextBox>
+                    <Label x:Name="UnarmedLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">Unarmed</Label>
+                    <TextBox x:Name="UnarmedBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Height="30" Text=""></TextBox>
+                    <Label x:Name="MeleeLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2">Melee</Label>
+                    <TextBox x:Name="MeleeBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="3" Height="30" Text=""></TextBox>
+                    <Label x:Name="ThrownLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4">Thrown</Label>
+                    <TextBox x:Name="ThrownBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="5" Height="30" Text=""></TextBox>
+                    <Button x:Name="SaveButton" Click="SaveButton_Click" Grid.Row="2" Grid.Column="4">Save</Button>
+                    <Button x:Name="ClearButton" Click="ClearButton_Click" Grid.Row="2" Grid.Column="5">Clear</Button>
+                 </Grid>
+                <Grid Grid.Row="3" x:Name="DamageGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer x:Name="WeaponsList" Grid.Row="0" Grid.Column="0">
+                        
+                    </ScrollViewer>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center">Weapons</Label>
+                        <ComboBox x:Name="WeaponDropdown" Grid.Row="1" Grid.Column="0" Height="30" VerticalAlignment="Center">
+
+                        </ComboBox>
+                        <Button x:Name="AddWeapon" Grid.Row="2" Width="100" Height="30" Click="AddWeapon_Click">Add Weapon</Button>
+                    </Grid>
+                    
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

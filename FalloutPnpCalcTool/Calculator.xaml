@@ -1,0 +1,166 @@
+﻿<Window x:Class="FalloutPnpCalcTool.Calculator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FalloutPnpCalcTool"
+        mc:Ignorable="d"
+        Title="Calculator">
+    <Grid x:Name="layoutGrid" Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="Attacker" Grid.Row="0" Grid.Column="0">Attacker</Label>
+            <ComboBox x:Name="AttackerDropDown" Grid.Row="0" Grid.Column="1" SelectionChanged="AttackerDropDown_SelectionChanged"></ComboBox>
+            <Label x:Name="Defender" Grid.Row="0" Grid.Column="2">Attacks</Label>
+            <ComboBox x:Name="DefenderDropDown" Grid.Row="0" Grid.Column="3" SelectionChanged="DefenderDropDown_SelectionChanged"></ComboBox>
+            <Label x:Name="WeaponLabel" Grid.Row="0" Grid.Column="4">With</Label>
+            <ComboBox x:Name="AttackWithDropDown" Grid.Row="0" Grid.Column="5" SelectionChanged="AttackWithDropDown_SelectionChanged"></ComboBox>
+        </Grid>
+        <ScrollViewer Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="NameGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Name</Label>
+                    <TextBox x:Name="NameBox" Grid.Row="0" Grid.Column="1" Height="30" Text="{Binding Path=Damage, Mode=TwoWay}"></TextBox>
+                </Grid>
+                <Grid x:Name="HitChanceGrid" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Base Skill</Label>
+                        <TextBox x:Name="BaseSkillBox" Grid.Row="0" Grid.Column="1" Height="30" Text="{Binding Path=x.BaseSkill, Mode=TwoWay}"></TextBox>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Target AC</Label>
+                        <TextBox x:Name="TargetACBox" Grid.Row="0" Grid.Column="3" Height="30" Text="{Binding Path=TargetAC, Mode=TwoWay}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Weapon Range</Label>
+                        <TextBox x:Name="WeaponRangeBox" Grid.Row="0" Grid.Column="1" Height="30"  Text="{Binding Path=WeaponRange, Mode=TwoWay}"></TextBox>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Perception</Label>
+                        <TextBox x:Name="PerceptionBox" Grid.Row="0" Grid.Column="3" Height="30" Text="{Binding Path=Perception, Mode=TwoWay}"></TextBox>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">Light Pnlty</Label>
+                        <TextBox x:Name="LightBox" Grid.Row="1" Grid.Column="1" Height="30"  Text="{Binding Path=Light, Mode=TwoWay}"></TextBox>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2">Target Pnlty</Label>
+                        <TextBox x:Name="TargetBox" Grid.Row="1" Grid.Column="3" Height="30" Text="{Binding Path=Target, Mode=TwoWay}"></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Distance</Label>
+                        <TextBox x:Name="DistanceBox" Grid.Row="0" Grid.Column="1" Height="30" Text="{Binding Path=Distance, Mode=TwoWay}"></TextBox>
+                        <Button x:Name="CalcHitChance" Grid.Column="3" Click="CalcHitChance_Click">Calculate Hit Chance</Button>
+                    </Grid>
+                </Grid>
+                <Grid x:Name="HitSuccessGrid" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label HorizontalAlignment="right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Hit Chance:</Label>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="HitChanceBox" Grid.Row="0" Grid.Column="1" FontSize="20" Text="{Binding Path=x.HitChanceText}"></TextBlock>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Roll To Hit:</Label>
+                    <TextBox x:Name="RollToHitBox" Grid.Row="0" Grid.Column="3" Height="30" Text="{Binding Path=RollToHit, Mode=TwoWay}"></TextBox>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">Crit Chance</Label>
+                    <TextBox x:Name="CriticalChanceBox" Grid.Row="1" Grid.Column="1" Height="30" Text="{Binding Path=Critical, Mode=TwoWay}"></TextBox>
+                    <Button x:Name="HitResultButton" Click="HitResultButton_Click" Grid.Row="2" Grid.Column="0">Result</Button>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="HitResult" FontSize="20" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Path=HitResultText}"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="3" x:Name="DamageGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Weapon Damage</Label>
+                    <TextBox x:Name="WeaponDamageBox" Grid.Row="0" Grid.Column="1" Height="30" Text="{Binding Path=Damage, Mode=TwoWay}"></TextBox>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Damage Threshold</Label>
+                    <TextBox x:Name="ThresholdBox" Grid.Row="0" Grid.Column="3" Height="30" Text="{Binding Path=Threshold, Mode=TwoWay}"></TextBox>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">Damage Resistance</Label>
+                    <TextBox x:Name="DamageResistanceBox" Grid.Row="1" Grid.Column="1" Height="30" Text="{Binding Path=Resistance, Mode=TwoWay}"></TextBox>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2">Modifier</Label>
+                    <TextBox x:Name="ModifierBox" Grid.Row="1" Grid.Column="3" Height="30" Text="{Binding Path=Modifier, Mode=TwoWay}"></TextBox>
+                    <Button x:Name="CalcDamage" Grid.Row="2" Grid.Column="0" Click="CalcDamage_Click">Calculate Damage</Button>
+                    <TextBlock x:Name="DamageTextBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding Path=DamageText}"></TextBlock>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>
