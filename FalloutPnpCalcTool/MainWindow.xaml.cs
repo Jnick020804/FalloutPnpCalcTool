@@ -1,6 +1,7 @@
 ﻿using FalloutPnpCalcTool.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -357,6 +358,367 @@ namespace FalloutPnpCalcTool
         {
             Window w = new Calculator();
             w.Show();
+        }
+
+        private void ParseDataCSV_Click(object sender, RoutedEventArgs e)
+        {
+            ReadCSV("data");
+        }
+
+        public void ReadCSV(string fileName)
+        {
+            // We change file extension here to make sure it's a .csv file.
+            // TODO: Error checking.
+            string[] lines = File.ReadAllLines(System.IO.Path.ChangeExtension(fileName, ".csv"));
+
+            // lines.Select allows me to project each line as a Person. 
+            // This will give me an IEnumerable<Person> back.
+           foreach(string line in lines)
+           {
+                string[] data = line.Split(',');
+
+                int type = 0;
+                if(int.TryParse(data[0],out type))
+                {
+                    switch(type)
+                    {
+                        case 0:
+                            AddCharacter(data);
+                            break;
+                        case 1:
+                            AddWeapon(data);
+                            break;
+                        case 2:
+                            AddPlayerWeapon(data);
+                            break;
+                        case 3:
+                            AddBeast(data);
+                            break;
+                        case 4:
+                            AddAttack(data);
+                            break;
+                        case 5:
+                            AddBeastAttack(data);
+                            break;
+
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+
+        public void AddCharacter(string[] data)
+        {
+            Guid cid = Guid.Empty;
+            int Prcp = 0;
+            int Ac = 0;
+            int smg = 0;
+            int bg = 0;
+            int ew = 0;
+            int me = 0;
+            int ua = 0;
+            int thr = 0;
+
+            Character c = new Character();
+
+            if(Guid.TryParse(data[1],out cid))
+            {
+                c.CharacterID = cid;
+            }
+            else
+            {
+                c.CharacterID = Guid.NewGuid();
+            }
+
+            if (int.TryParse(data[2], out Prcp))
+            {
+                c.Perception = Prcp;
+            }
+            else
+            {
+                c.Perception = Prcp;
+            }
+
+
+            if (int.TryParse(data[3], out Ac))
+            {
+                c.ArmorClass = Ac;
+            }
+            else
+            {
+                c.ArmorClass = Ac;
+            }
+
+            if (int.TryParse(data[4], out smg))
+            {
+                c.SmallGuns = smg;
+            }
+            else
+            {
+                c.SmallGuns = smg;
+            }
+
+            if (int.TryParse(data[5], out bg))
+            {
+                c.BigGuns = bg;
+            }
+            else
+            {
+                c.BigGuns = bg;
+            }
+
+            if (int.TryParse(data[6], out ew))
+            {
+                c.EnergyWeapons = ew;
+            }
+            else
+            {
+                c.EnergyWeapons = ew;
+            }
+
+            if (int.TryParse(data[7], out me))
+            {
+                c.Melee = me;
+            }
+            else
+            {
+                c.Melee = me;
+            }
+
+            if (int.TryParse(data[8], out ua))
+            {
+                c.Unarmed = ua;
+            }
+            else
+            {
+                c.Unarmed = ua;
+            }
+
+            if (int.TryParse(data[9], out thr))
+            {
+                c.Thrown = thr;
+            }
+            else
+            {
+                c.Thrown = thr;
+            }
+
+            c.Name = data[10];
+
+            App.Database.SaveCharacter(c);
+        }
+
+        public void AddWeapon(string[] data)
+        {
+            Guid id = Guid.Empty;
+            int dice = 0, numDice = 0, Range = 0, Modifier = 0, skill;
+            Weapon w = new Weapon();
+
+            if(Guid.TryParse(data[1],out id))
+            {
+                w.ID = id;
+            }
+            else
+            {
+                w.ID = Guid.NewGuid();
+            }
+
+            if (int.TryParse(data[2], out dice))
+            {
+                w.WeaponDice = dice;
+            }
+            else
+            {
+                w.WeaponDice = dice;
+            }
+
+            if (int.TryParse(data[3], out numDice))
+            {
+                w.NumberOfDice = numDice;
+            }
+            else
+            {
+                w.NumberOfDice = numDice;
+            }
+
+            if (int.TryParse(data[4], out Range))
+            {
+                w.RangeFeet = Range;
+            }
+            else
+            {
+                w.RangeFeet = Range;
+            }
+
+            if (int.TryParse(data[5], out Modifier))
+            {
+                w.WeaponModifier = Modifier;
+            }
+            else
+            {
+                w.WeaponModifier = Modifier;
+            }
+
+            if(int.TryParse(data[6],out skill))
+            {
+                w.skill = (GoverningSkill)skill;
+            }
+            else
+            {
+                w.skill = (GoverningSkill)skill;
+            }
+
+            w.WeaponName = data[7];
+
+            App.Database.SaveWeapon(w);
+        }
+
+        public void AddPlayerWeapon(string [] data)
+        {
+            Guid id = Guid.Empty, cid = Guid.Empty, wid = Guid.Empty;
+
+            PlayerWeapon pw = new PlayerWeapon();
+
+            if(Guid.TryParse(data[1],out id))
+            {
+                pw.ID = id;
+            }
+            else
+            {
+                pw.ID = Guid.NewGuid();
+            }
+
+            if(Guid.TryParse(data[2], out cid) && Guid.TryParse(data[3], out wid))
+            {
+                pw.CharacterID = cid;
+                pw.WeaponID = wid;
+
+                App.Database.SavePlayerWeapon(pw);
+            }
+        }
+
+        public void AddBeast(string [] data)
+        {
+            Guid id = Guid.Empty;
+            int perception = 0, ac = 0;
+
+            Beast b = new Beast();
+
+            if(Guid.TryParse(data[1],out id))
+            {
+                b.ID = id;
+            }
+            else
+            {
+                b.ID = Guid.NewGuid();
+            }
+
+            if (int.TryParse(data[2], out perception))
+            {
+                b.Perception = perception;
+            }
+            else
+            {
+                b.Perception = perception;
+            }
+
+            if (int.TryParse(data[3], out ac))
+            {
+                b.ArmorClass = ac;
+            }
+            else
+            {
+                b.ArmorClass = ac;
+
+            }
+
+            b.Name = data[4];
+
+            App.Database.SaveBeast(b);
+        }
+
+        public void AddAttack(string [] data)
+        {
+            Guid id = Guid.Empty;
+            int dice = 0, numDice = 0, hc = 0, Modifier = 0;
+            Attack a = new Attack();
+
+            if(Guid.TryParse(data[1],out id))
+            {
+                a.ID = id;
+            }
+            else
+            {
+                a.ID = Guid.NewGuid();
+            }
+
+            if (int.TryParse(data[2], out dice))
+            {
+                a.WeaponDice = dice;
+            }
+            else
+            {
+                a.WeaponDice = dice;
+            }
+
+            if (int.TryParse(data[3], out numDice))
+            {
+                a.NumberOfDice = numDice;
+            }
+            else
+            {
+                a.NumberOfDice = numDice;
+
+            }
+
+            if (int.TryParse(data[4], out hc))
+            {
+                a.HitChance = hc;
+            }
+            else
+            {
+                a.HitChance = hc;
+            }
+
+            if (int.TryParse(data[5], out Modifier))
+            {
+                a.WeaponModifier = Modifier;
+            }
+            else
+            {
+                a.WeaponModifier = Modifier;
+
+            }
+            a.Name = data[6];
+
+            App.Database.SaveAttack(a);
+        }
+
+        public void AddBeastAttack(string[] data)
+        {
+            Guid id = Guid.Empty, cid = Guid.Empty, wid = Guid.Empty;
+
+            BeastAttack pw = new BeastAttack();
+
+            if (Guid.TryParse(data[1], out id))
+            {
+                pw.ID = id;
+            }
+            else
+            {
+                pw.ID = Guid.NewGuid();
+            }
+
+            if (Guid.TryParse(data[2], out cid) && Guid.TryParse(data[3], out wid))
+            {
+                pw.BeastID = cid;
+                pw.AttackID = wid;
+
+                App.Database.SaveBeastAttack(pw);
+            }
         }
     }
 

@@ -28,12 +28,14 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Row="0" Grid.Column="0" x:Name="AddCharacterButton" Click="AddCharacterButton_Click" Height="30" VerticalAlignment="Top">Add Character</Button>
             <Button Grid.Row="0" Grid.Column="1" x:Name="AddBeastButton" Click="AddBeastButton_Click" Height="30" VerticalAlignment="Top">Add Beast</Button>
             <Button Grid.Row="0" Grid.Column="2" x:Name="AddWeaponButton" Click="AddWeaponButton_Click" Height="30" VerticalAlignment="Top">Add Weapon</Button>
             <Button Grid.Row="0" Grid.Column="3" x:Name="AddAttackButton" Click="AddAttackButton_Click" Height="30" VerticalAlignment="Top">Add Attack</Button>
             <Button Grid.Row="0" Grid.Column="4" x:Name="OpenCalcButton" Click="OpenCalcButton_Click" Height="30" VerticalAlignment="Top">Open Calculator</Button>
+            <Button Grid.Row="0" Grid.Column="5" x:Name="ParseDataCSV" Click="ParseDataCSV_Click" Height="30" VerticalAlignment="Top">Import Data</Button>
         </Grid>
         <Label Grid.Row="1" FontSize="20" Grid.Column="0">Characters</Label>
         <ScrollViewer x:Name="CharactersView" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="0"></ScrollViewer>

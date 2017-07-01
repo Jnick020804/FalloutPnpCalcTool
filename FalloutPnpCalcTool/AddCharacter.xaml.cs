@@ -124,6 +124,9 @@ namespace FalloutPnpCalcTool
             int smg = 0;
             int bg = 0;
             int ew = 0;
+            int me = 0;
+            int ua = 0;
+            int thr = 0;
             this.CName = this.NameBox.Text;
 
             if(int.TryParse(this.PerceptionBox.Text,out Prcp))
@@ -149,6 +152,21 @@ namespace FalloutPnpCalcTool
             if (int.TryParse(this.EnergyWeaponsBox.Text, out ew))
             {
                 this.EnergyWeapons = ew;
+            }
+
+            if (int.TryParse(this.MeleeBox.Text, out me))
+            {
+                this.Melee = me;
+            }
+
+            if (int.TryParse(this.UnarmedBox.Text, out ua))
+            {
+                this.Unarmed = ua;
+            }
+
+            if (int.TryParse(this.ThrownBox.Text, out thr))
+            {
+                this.Thrown = thr;
             }
         }
 

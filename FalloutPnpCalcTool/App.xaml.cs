@@ -59,16 +59,16 @@ namespace FalloutPnpCalcTool
 
 
             Task.WaitAll(t1, t2, t3, t4);
-            Characters = c;
+            Characters = c.OrderBy(ch => ch.Name).ToList();
             CharacterDate = DateTime.Now;
 
-            Beasts = b;
+            Beasts = b.OrderBy(be => be.Name).ToList();
             BeastDate = DateTime.Now;
 
-            Weapons = w;
+            Weapons = w.OrderBy(we => we.WeaponName).ToList();
             WeaponDate = DateTime.Now;
 
-            Attacks = a;
+            Attacks = a.OrderBy(at => at.Name).ToList();
             AttackDate = DateTime.Now;
 
             foreach(var item in c)
@@ -90,6 +90,7 @@ namespace FalloutPnpCalcTool
 
                 Beings.Add(cb);
             }
+            Beings = Beings.OrderBy(bei => bei.Name).ToList();
             BeingDate = DateTime.Now;
         }
     }

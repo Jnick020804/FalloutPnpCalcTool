@@ -153,7 +153,7 @@ namespace FalloutPnpCalcTool.Models
                 cbl.Add(cb);
             }
 
-            App.Beings = cbl;
+            App.Beings = cbl.OrderBy(bei => bei.Name).ToList();
             App.BeingDate = DateTime.Now;
         }
 
@@ -163,7 +163,7 @@ namespace FalloutPnpCalcTool.Models
             Task t1 = Task.Run(async () => { c = await GetCharactersAsync(); });
             t1.Wait();
 
-            App.Characters = c;
+            App.Characters = c.OrderBy(ch => ch.Name).ToList();
             App.CharacterDate = DateTime.Now;
         }
 
@@ -212,7 +212,7 @@ namespace FalloutPnpCalcTool.Models
             Task t1 = Task.Run(async () => { w = await GetBeastsAsync(); });
             t1.Wait();
 
-            App.Beasts = w;
+            App.Beasts = w.OrderBy(be => be.Name).ToList(); ;
             App.BeastDate = DateTime.Now;
         }
 
@@ -259,7 +259,7 @@ namespace FalloutPnpCalcTool.Models
             Task t1 = Task.Run(async () => { a = await GetAttacksAsync(); });
             t1.Wait();
 
-            App.Attacks = a;
+            App.Attacks = a.OrderBy(at => at.Name).ToList();
             App.AttackDate = DateTime.Now;
         }
 
