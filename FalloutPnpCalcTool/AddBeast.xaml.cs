@@ -196,7 +196,12 @@ namespace FalloutPnpCalcTool
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.PerceptionBox.Text = "";
+            this.Perception = 0;
+            this.NameBox.Text = "";
+            this.BName = "";
+            this.ArmorClassBox.Text = "";
+            this.ArmorClass = 0;
         }
     }
 }

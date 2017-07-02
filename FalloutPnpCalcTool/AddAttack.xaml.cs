@@ -158,7 +158,16 @@ namespace FalloutPnpCalcTool
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.NumDiceBox.Text = "";
+            this.NumberOfDice = 0;
+            this.DiceBox.Text = "";
+            this.WeaponDice = 0;
+            this.ModifierBox.Text = "";
+            this.WeaponModifier = 0;
+            this.HitChanceBox.Text = "";
+            this.HitChance = 0;
+            this.NameBox.Text = "";
+            this.AName = "";
         }
     }
 }

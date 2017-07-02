@@ -251,7 +251,24 @@ namespace FalloutPnpCalcTool
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-
+            this.PerceptionBox.Text = "";
+            this.Perception = 0;
+            this.ArmorClassBox.Text = "";
+            this.ArmorClass = 0;
+            this.SmallGunsBox.Text = "";
+            this.SmallGuns = 0;
+            this.BigGunsBox.Text = "";
+            this.BigGuns = 0;
+            this.EnergyWeaponsBox.Text = "";
+            this.EnergyWeapons = 0;
+            this.UnarmedBox.Text = "";
+            this.Unarmed = 0;
+            this.MeleeBox.Text = "";
+            this.Melee = 0;
+            this.ThrownBox.Text = "";
+            this.Thrown = 0;
+            this.NameBox.Text = "";
+            this.CName = "";
         }
 
         private void AddWeapon_Click(object sender, RoutedEventArgs e)
