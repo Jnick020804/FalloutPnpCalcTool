@@ -50,6 +50,11 @@ namespace FalloutPnpCalcTool.Models
             return database.Table<Weapon>().ToListAsync();
         }
 
+        public Task<List<PlayerWeapon>> GetPlayerWeaponsAsync()
+        {
+            return database.Table<PlayerWeapon>().ToListAsync();
+        }
+
         public Task<Weapon> GetWeaponAsync(Guid id)
         {
             return database.Table<Weapon>().Where(w => w.ID == id).FirstOrDefaultAsync();
@@ -81,6 +86,11 @@ namespace FalloutPnpCalcTool.Models
             List<Attack> a = await database.Table<Attack>().ToListAsync();
 
             return a.Where(ba => beastAttacks.Any(b => b.AttackID == ba.ID)).ToList();
+        }
+
+        public Task<List<BeastAttack>> GetBeastAttacksAsync()
+        {
+            return database.Table<BeastAttack>().ToListAsync();
         }
 
         public int SaveCharacter(Character c)

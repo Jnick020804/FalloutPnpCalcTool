@@ -32,11 +32,13 @@ namespace FalloutPnpCalcTool
         public DateTime WeaponDate { get; set; }
         public DateTime AttackDate { get; set; }
         public DispatcherTimer DispatcherTimer { get; set; }
+        public List<string> MatchedPaths { get; set; }
 
         public MainWindow()
         {
             
             InitializeComponent();
+            MatchedPaths = new List<string>();
             DispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             DispatcherTimer.Tick += dispatcherTimer_Tick;
             DispatcherTimer.Interval = new TimeSpan(0, 0, 5);
@@ -365,48 +367,93 @@ namespace FalloutPnpCalcTool
             ReadCSV("data");
         }
 
+        public void DirSearch(string sDir,string filename)
+        {
+            try
+            {
+                string[] dr = Directory.GetDirectories(sDir);
+                foreach (string d in dr)
+                {
+                    if (!string.IsNullOrEmpty(d))
+                    {
+                        try
+                        {
+                            string[] temp = Directory.GetFiles(d, filename);
+                            if (temp.Length > 0)
+                            {
+                                this.MatchedPaths.Add(temp[0]);
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            continue;
+                        }
+
+                        
+
+                    }
+  
+                    
+                }
+            }
+            catch (System.Exception excpt)
+            {
+                
+            }
+        }
+
         public void ReadCSV(string fileName)
         {
             // We change file extension here to make sure it's a .csv file.
             // TODO: Error checking.
-            string[] lines = File.ReadAllLines(System.IO.Path.ChangeExtension(fileName, ".csv"));
 
-            // lines.Select allows me to project each line as a Person. 
-            // This will give me an IEnumerable<Person> back.
-           foreach(string line in lines)
-           {
-                string[] data = line.Split(',');
+            DirSearch("C:\\", "FPnPdata.csv");
+            if (MatchedPaths.Count > 0)
+            {
+                string[] lines = File.ReadAllLines(System.IO.Path.ChangeExtension(MatchedPaths.First(), ".csv"));
 
-                int type = 0;
-                if(int.TryParse(data[0],out type))
+
+
+
+                // lines.Select allows me to project each line as a Person. 
+                // This will give me an IEnumerable<Person> back.
+                foreach (string line in lines)
                 {
-                    switch(type)
-                    {
-                        case 0:
-                            AddCharacter(data);
-                            break;
-                        case 1:
-                            AddWeapon(data);
-                            break;
-                        case 2:
-                            AddPlayerWeapon(data);
-                            break;
-                        case 3:
-                            AddBeast(data);
-                            break;
-                        case 4:
-                            AddAttack(data);
-                            break;
-                        case 5:
-                            AddBeastAttack(data);
-                            break;
+                    string[] data = line.Split(',');
 
+                    int type = 0;
+                    if (int.TryParse(data[0], out type))
+                    {
+                        switch (type)
+                        {
+                            case 0:
+                                AddCharacter(data);
+                                break;
+                            case 1:
+                                AddWeapon(data);
+                                break;
+                            case 2:
+                                AddPlayerWeapon(data);
+                                break;
+                            case 3:
+                                AddBeast(data);
+                                break;
+                            case 4:
+                                AddAttack(data);
+                                break;
+                            case 5:
+                                AddBeastAttack(data);
+                                break;
+
+                        }
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
-                else
-                {
-                    continue;
-                }
+
+                File.Delete(MatchedPaths.First());
             }
         }
 
@@ -718,6 +765,74 @@ namespace FalloutPnpCalcTool
                 pw.AttackID = wid;
 
                 App.Database.SaveBeastAttack(pw);
+            }
+        }
+
+        public void WriteDataToCSV()
+        {
+            List<PlayerWeapon> pw = new List<PlayerWeapon>();
+            List<BeastAttack> ba = new List<BeastAttack>();
+
+            Task t1 = Task.Run(async () => { pw = await App.Database.GetPlayerWeaponsAsync(); });
+            Task t2 = Task.Run(async () => { ba = await App.Database.GetBeastAttacksAsync(); });
+
+            Task.WaitAll(t1, t2);
+            //before your loop
+            var csv = new StringBuilder();
+
+            foreach (Character c in this.Characters)
+            {
+                csv.AppendLine($"0,{c.CharacterID},{c.Perception},{c.ArmorClass},{c.SmallGuns},{c.BigGuns},{c.EnergyWeapons},{c.Melee},{c.Unarmed},{c.Thrown},{c.Name}");
+            }
+
+            foreach (Weapon w in this.Weapons)
+            {
+                csv.AppendLine($"1,{w.ID},{w.WeaponDice},{w.NumberOfDice},{w.RangeFeet},{w.WeaponModifier},{w.skill},{w.WeaponName}");
+            }
+
+            foreach(PlayerWeapon item in pw)
+            {
+                csv.AppendLine($"2,{item.ID},{item.CharacterID},{item.WeaponID}");
+            }
+            
+            foreach(Beast b in this.Beasts)
+            {
+                csv.AppendLine($"3,{b.ID},{b.Perception},{b.ArmorClass},{b.Name}");
+            }
+
+            foreach(Attack a in this.Attacks)
+            {
+                csv.AppendLine($"4,{a.ID},{a.WeaponDice},{a.NumberOfDice},{a.HitChance},{a.WeaponModifier},{a.Name}");
+            }
+
+            foreach(BeastAttack item in ba)
+            {
+                csv.AppendLine($"5,{item.ID},{item.BeastID},{item.AttackID}");
+            }
+            //Suggestion made by KyleMit
+
+
+            if(this.MatchedPaths.Count > 0)
+            {
+                File.WriteAllText(MatchedPaths.First(), csv.ToString());
+            }
+            else
+            {
+                File.WriteAllText("C:\\Fpnp\\FPnPdata.csv", csv.ToString());
+            }
+
+            
+        }
+
+        private void ExportDataCSV_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                WriteDataToCSV();
+            }
+            catch(Exception ex)
+            {
+
             }
         }
     }
