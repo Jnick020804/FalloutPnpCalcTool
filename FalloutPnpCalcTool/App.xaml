@@ -22,6 +22,7 @@
 
 
         <FontFamily x:Key="ShareTechMono">pack://application:,,,/Fonts/#Share Tech Mono</FontFamily>
+        <FontFamily x:Key="FontAwesome">pack://application:,,,/Fonts/#FontAwesome</FontFamily>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#71d72a"/>
@@ -127,9 +128,9 @@
                                     sw:ShowSystemMenuBehavior.RightButtonShow="true">
                         </Label>
                         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Stretch">
-                            <Button DockPanel.Dock="Right" VerticalAlignment="Stretch" FontFamily="{StaticResource ShareTechMono}" Style="{StaticResource WindowButton}" Command="{StaticResource MinimizeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">_</Button>
-                            <Button DockPanel.Dock="Right" VerticalAlignment="Stretch" FontFamily="{StaticResource ShareTechMono}" Style="{StaticResource WindowButton}" Command="{StaticResource MaximizeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">+</Button>
-                            <Button DockPanel.Dock="Right" VerticalAlignment="Stretch" FontFamily="{StaticResource ShareTechMono}"  Style="{StaticResource WindowButton}" Command="{StaticResource CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">X</Button>
+                            <Button DockPanel.Dock="Right" VerticalAlignment="Stretch" FontFamily="{StaticResource FontAwesome}" Style="{StaticResource WindowButton}" Command="{StaticResource MinimizeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">&#xf2d1;</Button>
+                            <Button DockPanel.Dock="Right" VerticalAlignment="Stretch" FontFamily="{StaticResource FontAwesome}" Style="{StaticResource WindowButton}" Command="{StaticResource MaximizeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">&#xf2d0;</Button>
+                            <Button DockPanel.Dock="Right" VerticalAlignment="Stretch" FontFamily="{StaticResource FontAwesome}"  Style="{StaticResource WindowButton}" Command="{StaticResource CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">&#xf00d;</Button>
                         </StackPanel>
                     </Grid>
                     <Border Grid.Row="1" BorderBrush="#71d72a" BorderThickness="1 1 1 1" Background="{TemplateBinding Background}">

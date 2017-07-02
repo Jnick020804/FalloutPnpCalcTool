@@ -233,6 +233,7 @@
     </EmbeddedResource>
     <None Include="FalloutPnpCalcTool_TemporaryKey.pfx" />
     <Resource Include="Fonts\ShareTechMono-Regular.ttf" />
+    <Resource Include="Fonts\fontawesome-webfont.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
