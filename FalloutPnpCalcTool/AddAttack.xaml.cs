@@ -83,11 +83,13 @@ namespace FalloutPnpCalcTool
 
         private void SetUIFromValues()
         {
+            this.Initializing = true;
             this.NumDiceBox.Text = this.NumberOfDice.ToString();
             this.DiceBox.Text = this.WeaponDice.ToString();
             this.ModifierBox.Text = this.WeaponModifier.ToString();
             this.HitChanceBox.Text = this.HitChance.ToString();
             this.NameBox.Text = this.AName;
+            this.Initializing = false;
         }
 
         private void SetValuesFromAttack(Attack attack)
