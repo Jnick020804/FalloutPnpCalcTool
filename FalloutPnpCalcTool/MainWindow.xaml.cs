@@ -364,7 +364,14 @@ namespace FalloutPnpCalcTool
 
         private void ParseDataCSV_Click(object sender, RoutedEventArgs e)
         {
-            ReadCSV("data");
+            try
+            {
+                ReadCSV("data");
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         public void DirSearch(string sDir,string filename)
