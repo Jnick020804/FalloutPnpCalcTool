@@ -5,16 +5,25 @@
                  xmlns:sw="clr-namespace:FalloutPnpCalcTool.WindowStyle" 
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
-        
-        
-        
-        
-        
-        
+
+
+        <LinearGradientBrush MappingMode="Absolute" x:Key="HatchBrush"  StartPoint="0,0" EndPoint="0,4" SpreadMethod="Repeat">
+            <GradientStop Offset="0" Color="Black"/>
+            <GradientStop Offset="0.25" Color="Black"/>
+            <GradientStop Offset="0.25" Color="#0c160c"/>
+            <GradientStop Offset="0.50" Color="#0c160c"/>
+            <GradientStop Offset="0.50" Color="#072108"/>
+            <GradientStop Offset="0.75" Color="#072108"/>
+            <GradientStop Offset="0.75" Color="Black"/>
+            <GradientStop Offset="1" Color="Black"/>
+        </LinearGradientBrush>
+
+
+
+
         <FontFamily x:Key="ShareTechMono">pack://application:,,,/Fonts/#Share Tech Mono</FontFamily>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#71d72a"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Template">
@@ -28,7 +37,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -43,13 +52,19 @@
         </Style>
 
         <Style TargetType="Label">
-            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#71d72a"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="HeaderLabel">
+            <Setter Property="Background" Value="{StaticResource HatchBrush}"/>
             <Setter Property="Foreground" Value="#71d72a"/>
             <Setter Property="FontSize" Value="15"/>
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#71d72a"/>
             <Setter Property="BorderBrush" Value="#71d72a"/>
             <Setter Property="FontSize" Value="15"/>
@@ -61,7 +76,7 @@
         <Style TargetType="{x:Type Button}" x:Key="WindowButton">
             <Setter Property="Height" Value="25"/>
             <Setter Property="Width" Value="25"/>
-            <Setter Property="Background" Value="black"/>
+            <Setter Property="Background" Value="{StaticResource HatchBrush}"/>
             <Setter Property="Foreground" Value="#71d72a"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -90,7 +105,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="75"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0"                                            
+                        <Label Grid.Column="0" Style="{StaticResource HeaderLabel}"                                         
                                     sw:ControlDoubleClickBehavior.ExecuteCommand="{StaticResource CloseCommand}"                                                
                                     sw:ControlDoubleClickBehavior.ExecuteCommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Padding="0">
                             <Image DockPanel.Dock="Left" Style="{StaticResource WindowIcon}" Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}},Path=Icon}"                                          
@@ -98,7 +113,7 @@
                                     sw:ShowSystemMenuBehavior.TargetWindow="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"                                            
                                     sw:ShowSystemMenuBehavior.LeftButtonShowAt="{Binding ElementName=WindowContent}"/>
                         </Label>
-                        <Label Grid.Column="1" DockPanel.Dock="Left" Content="{TemplateBinding Property=Title}" Padding="3,0,0,0"                                                                                   
+                        <Label Grid.Column="1" Style="{StaticResource HeaderLabel}" DockPanel.Dock="Left" Content="{TemplateBinding Property=Title}" Padding="3,0,0,0"                                                                                   
                                     HorizontalContentAlignment="Center" 
                                     VerticalContentAlignment="Center" 
                                     HorizontalAlignment="Stretch" 
@@ -261,18 +276,13 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
-                <Border x:Name="Border"
+                <Border x:Name="Border" Background="Transparent"
             Grid.ColumnSpan="2"
             CornerRadius="2"
             BorderThickness="1">
                     <Border.BorderBrush>
                         <SolidColorBrush Color="#71d72a"/>
                     </Border.BorderBrush>
-                    <Border.Background>
-
-                        <SolidColorBrush Color="Black"/>
-
-                    </Border.Background>
                 </Border>
                 <Border Grid.Column="0"
             CornerRadius="2,0,0,2"
@@ -412,14 +422,14 @@
 
 
         <Style TargetType="ListView">
-            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Background" Value="#71d72a"/>
             <Setter Property="BorderBrush" Value="#71d72a"/>
             <Setter Property="BorderThickness" Value="1 1 1 1"/>
         </Style>
 
         <Style TargetType="ListViewItem">
-            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Background" Value="#71d72a"/>
             <Setter Property="FontSize" Value="15"/>
         </Style>

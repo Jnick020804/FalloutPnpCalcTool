@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FalloutPnpCalcTool"
         mc:Ignorable="d"
-        Title="Add Character" FontFamily="{StaticResource ShareTechMono}" Background="Black" Style="{StaticResource CustomWindowStyle}">
+        Title="Add Character" FontFamily="{StaticResource ShareTechMono}" Background="{StaticResource HatchBrush}" Style="{StaticResource CustomWindowStyle}">
     <Grid x:Name="layoutGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
