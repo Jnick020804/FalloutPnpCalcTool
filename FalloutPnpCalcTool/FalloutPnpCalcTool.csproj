@@ -31,7 +31,7 @@
     <ProductName>Fallout PnP Calculator Utility</ProductName>
     <PublisherName>Jared Palmer</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -172,6 +172,14 @@
     <Compile Include="Models\Database.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
+    <Compile Include="WindowStyle\ControlDoubleClickBehavior.cs" />
+    <Compile Include="WindowStyle\ShowSystemMenuBehavior .cs" />
+    <Compile Include="WindowStyle\SystemMenuManager .cs" />
+    <Compile Include="WindowStyle\WindowCloseCommand.cs" />
+    <Compile Include="WindowStyle\WindowDragBehavior.cs" />
+    <Compile Include="WindowStyle\WindowMaximizeCommand.cs" />
+    <Compile Include="WindowStyle\WindowMinimizeCommand.cs" />
+    <Compile Include="WindowStyle\WindowResizeBehavior .cs" />
     <Page Include="AddAttack.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +232,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="FalloutPnpCalcTool_TemporaryKey.pfx" />
+    <Resource Include="Fonts\ShareTechMono-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

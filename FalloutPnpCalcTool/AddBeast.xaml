@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FalloutPnpCalcTool"
         mc:Ignorable="d"
-        Title="AddBeast">
-    <Grid x:Name="layoutGrid" Background="LightGray">
+        Title="AddBeast" FontFamily="{StaticResource ShareTechMono}" Background="Black" Style="{StaticResource CustomWindowStyle}">
+    <Grid x:Name="layoutGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10*"/>
