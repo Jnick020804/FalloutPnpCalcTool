@@ -641,7 +641,11 @@ namespace FalloutPnpCalcTool.Models
         public int EnergyWeapons { get; set; }
         public int BigGuns { get; set; }
         public int ArmorClass { get; set; }
+        public int Sequence { get; set; }
+        public int ActionPoints { get; set;}
+        public int MaxHitPoints { get; set; }
         public string Name { get; set; }
+
         [Ignore]
         public List<Weapon> Weapons { get; set; }
     }
@@ -650,6 +654,7 @@ namespace FalloutPnpCalcTool.Models
     {
         public string Name { get; set; }
         public Type Type { get; set; }
+        public Guid ID { get; set; }
         public object Object { get; set; }
     }
     public class PlayerWeapon
@@ -670,6 +675,7 @@ namespace FalloutPnpCalcTool.Models
         public int NumberOfDice { get; set; }
         public int RangeFeet { get; set; }
         public int WeaponModifier { get; set; }
+        public int APCost { get; set; }
         public string WeaponName { get; set; }
         public GoverningSkill skill { get; set; }
     }
@@ -681,6 +687,9 @@ namespace FalloutPnpCalcTool.Models
         public int Perception { get; set; }
         public int ArmorClass { get; set; }
         public string Name { get; set; }
+        public int Sequence { get; set; }
+        public int ActionPoints { get; set; }
+        public int MaxHitPoints { get; set; }
         [Ignore]
         public List<Attack> Attacks { get; set; }
     }
@@ -703,7 +712,50 @@ namespace FalloutPnpCalcTool.Models
         public int WeaponDice { get; set; }
         public int WeaponModifier { get; set; }
         public int HitChance { get; set; }
+        public int RangeFeet { get; set; }
+        public int APCost { get; set; }
         public string Name { get; set; }
+    }
+
+    public class BattleObject
+    {
+        public Guid ID { get; set; }
+        public Type Type { get; set; }
+        public object Object { get; set;}
+        public int XCord { get; set; }
+        public int YCord { get; set; }
+        public int Sequence { get; set; }
+        public int ActionPoints { get; set;}
+        public int MaxActionPoints { get; set; }
+        public int AC { get; set; }
+        public int CurrentHp { get; set; }
+        public string Name { get; set; }
+        public List<BattleObjectComparison> Comparisons { get; set; }
+    }
+
+    public class BattleObjectComparison
+    {
+        public BattleObject Target { get; set; }
+        public BattleObject Self { get; set; }
+        public double DistanceFeet
+        {
+            get
+            {
+                double dist = Math.Pow((double)(Target.XCord - Self.XCord), (double)2) + Math.Pow((double)(Target.YCord - Self.YCord), (double)2);
+                double i = (Math.Sqrt(dist));
+                return i;
+            }
+        }
+
+        public int DistanceFeetRounded
+        {
+            get
+            {
+                double dist = Math.Pow((double)(Target.XCord - Self.XCord), (double)2) + Math.Pow((double)(Target.YCord - Self.YCord), (double)2);
+                int i = ((int)Math.Round(Math.Sqrt(dist)));
+                return i;
+            }
+        }
     }
 
     

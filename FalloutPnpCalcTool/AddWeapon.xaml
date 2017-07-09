@@ -45,11 +45,17 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Label x:Name="DiceLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Dice</Label>
-                    <TextBox x:Name="DiceBox" HorizontalAlignment="Stretch" TextChanged="DiceBox_TextChanged" Grid.Row="0" Grid.Column="1" Height="30" Text=""></TextBox>
-                    <Label x:Name="NumDiceLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Number of Dice</Label>
-                    <TextBox x:Name="NumDiceBox" HorizontalAlignment="Stretch" TextChanged="DiceBox_TextChanged" Grid.Row="0" Grid.Column="3" Height="30" Text=""></TextBox>
+                    <Label x:Name="DiceLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Dice</Label>
+                    <TextBox x:Name="DiceBox" HorizontalAlignment="Stretch" TextChanged="DiceBox_TextChanged" Grid.Row="0" Grid.Column="3" Height="30" Text=""></TextBox>
+                    
+                    <Label x:Name="NumDiceLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4">Number of Dice</Label>
+                    <TextBox x:Name="NumDiceBox" HorizontalAlignment="Stretch" TextChanged="DiceBox_TextChanged" Grid.Row="0" Grid.Column="5" Height="30" Text=""></TextBox>
+
+                    <Label x:Name="APLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">AP Cost</Label>
+                    <TextBox x:Name="APBox" HorizontalAlignment="Stretch" TextChanged="DiceBox_TextChanged" Grid.Row="0" Grid.Column="1" Height="30" Text=""></TextBox>
                 </Grid>
                 <Grid x:Name="Skills" Grid.Row="2">
                     <Grid.RowDefinitions>

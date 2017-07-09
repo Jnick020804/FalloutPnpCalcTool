@@ -23,6 +23,7 @@ namespace FalloutPnpCalcTool
         public Guid ID { get; set; }
         public int WeaponDice { get; set; }
         public int NumberOfDice { get; set; }
+        public int APCost { get; set; }
         public int RangeFeet { get; set; }
         public int WeaponModifier { get; set; }
         public string WeaponName { get; set; }
@@ -73,6 +74,7 @@ namespace FalloutPnpCalcTool
             this.WeaponModifier = w.WeaponModifier;
             this.WeaponName = w.WeaponName;
             this.skill = w.skill;
+            this.APCost = w.APCost;
         }
 
         public void SetUIFromValues()
@@ -83,13 +85,14 @@ namespace FalloutPnpCalcTool
             this.RangeBox.Text = this.RangeFeet.ToString();
             this.ModifierBox.Text = this.WeaponModifier.ToString();
             this.NameBox.Text = this.WeaponName;
+            this.APBox.Text = this.APCost.ToString();
             this.GoverningSkill.SelectedValue = (int)this.skill;
             this.Initializing = false;
         }
 
         public void SetValuesFromUI()
         {
-            int dice = 0, numDice = 0, Range = 0, Modifier = 0;
+            int dice = 0, numDice = 0, Range = 0, Modifier = 0, ap = 0;
 
             if(int.TryParse(this.DiceBox.Text,out dice))
             {
@@ -111,7 +114,12 @@ namespace FalloutPnpCalcTool
                 this.WeaponModifier = Modifier;
             }
 
-            if(this.GoverningSkill.SelectedItem != null)
+            if (int.TryParse(this.APBox.Text, out ap))
+            {
+                this.APCost = ap;
+            }
+
+            if (this.GoverningSkill.SelectedItem != null)
             this.skill = (GoverningSkill)((KeyValuePair<int,string>)this.GoverningSkill.SelectedItem).Key;
             this.WeaponName= this.NameBox.Text;
         }
@@ -124,6 +132,7 @@ namespace FalloutPnpCalcTool
             this.Weapon.WeaponDice = this.WeaponDice;
             this.Weapon.WeaponModifier = this.WeaponModifier;
             this.Weapon.WeaponName = this.WeaponName;
+            this.Weapon.APCost = this.APCost;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

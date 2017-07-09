@@ -435,11 +435,14 @@ namespace FalloutPnpCalcTool
             ComboBox c = (ComboBox)sender;
             CompositeBeing cb = (CompositeBeing)c.SelectedItem;
 
+
             if (cb.Type == typeof(Character))
             {
                 AttackWithType = typeof(Weapon);
                 Character ch = (Character)cb.Object;
                 this.Perception = ch.Perception;
+                this.WeaponRange = 0;
+                this.Distance = 0;
                 SetName();
                 UpdateUI(ReturnInstance());
                 List<Weapon> w = new List<Weapon>();
@@ -454,6 +457,9 @@ namespace FalloutPnpCalcTool
             {
                 AttackWithType = typeof(Attack);
                 Beast b = (Beast)cb.Object;
+                this.Perception = b.Perception;
+                this.WeaponRange = 0;
+                this.Distance = 0;
                 SetName();
                 UpdateUI(ReturnInstance());
                 List<Attack> w = new List<Attack>();

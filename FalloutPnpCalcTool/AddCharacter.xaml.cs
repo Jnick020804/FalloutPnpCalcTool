@@ -31,6 +31,9 @@ namespace FalloutPnpCalcTool
         public int EnergyWeapons { get; set; }
         public int BigGuns { get; set; }
         public int ArmorClass { get; set; }
+        public int MaxHitPoints { get; set; }
+        public int ActionPoints{ get; set; }
+        public int Sequence { get; set; }
         public string CName { get; set; }
         public Character c { get; set; }
         public List<Weapon> Weapons { get; set; }
@@ -89,6 +92,9 @@ namespace FalloutPnpCalcTool
             this.BigGuns = c.BigGuns;
             this.ArmorClass = c.ArmorClass;
             this.CName = c.Name;
+            this.ActionPoints = c.ActionPoints;
+            this.MaxHitPoints = c.MaxHitPoints;
+            this.Sequence = c.Sequence;
 
         }
 
@@ -115,6 +121,9 @@ namespace FalloutPnpCalcTool
             this.c.BigGuns = this.BigGuns;
             this.c.ArmorClass = this.ArmorClass;
             this.c.Name = this.CName;
+            this.c.Sequence = this.Sequence;
+            this.c.MaxHitPoints = this.MaxHitPoints;
+            this.c.ActionPoints = this.ActionPoints;
         }
 
         public void SetValuesFromForm()
@@ -127,6 +136,9 @@ namespace FalloutPnpCalcTool
             int me = 0;
             int ua = 0;
             int thr = 0;
+            int seq = 0;
+            int ap = 0;
+            int mhp = 0;
             this.CName = this.NameBox.Text;
 
             if(int.TryParse(this.PerceptionBox.Text,out Prcp))
@@ -168,6 +180,21 @@ namespace FalloutPnpCalcTool
             {
                 this.Thrown = thr;
             }
+
+            if (int.TryParse(this.HPBox.Text, out mhp))
+            {
+                this.MaxHitPoints= mhp;
+            }
+
+            if (int.TryParse(this.SequenceBox.Text, out seq))
+            {
+                this.Sequence= seq;
+            }
+
+            if (int.TryParse(this.APBox.Text, out ap))
+            {
+                this.ActionPoints = ap;
+            }
         }
 
         public void SetFormFromValues()
@@ -180,6 +207,9 @@ namespace FalloutPnpCalcTool
             this.UnarmedBox.Text = this.Unarmed.ToString();
             this.MeleeBox.Text = this.Melee.ToString();
             this.ThrownBox.Text = this.Thrown.ToString();
+            this.SequenceBox.Text = this.Sequence.ToString();
+            this.APBox.Text = this.ActionPoints.ToString();
+            this.HPBox.Text = this.MaxHitPoints.ToString();
             this.NameBox.Text = this.CName;
             this.WeaponDropdown.ItemsSource = this.Weapons;
 
@@ -230,6 +260,9 @@ namespace FalloutPnpCalcTool
                 c.SmallGuns = this.SmallGuns;
                 c.Thrown = this.Thrown;
                 c.Unarmed = this.Unarmed;
+                c.Sequence = this.Sequence;
+                c.MaxHitPoints = this.MaxHitPoints;
+                c.ActionPoints = this.ActionPoints;
 
                 int i = App.Database.SaveCharacter(c);
             }
@@ -245,6 +278,9 @@ namespace FalloutPnpCalcTool
                 c.SmallGuns = this.SmallGuns;
                 c.Thrown = this.Thrown;
                 c.Unarmed = this.Unarmed;
+                c.Sequence = this.Sequence;
+                c.MaxHitPoints = this.MaxHitPoints;
+                c.ActionPoints = this.ActionPoints;
                 int i = App.Database.SaveCharacter(c);
             }
         }
@@ -269,6 +305,12 @@ namespace FalloutPnpCalcTool
             this.Thrown = 0;
             this.NameBox.Text = "";
             this.CName = "";
+            this.HPBox.Text = "";
+            this.MaxHitPoints = 0;
+            this.SequenceBox.Text = "";
+            this.Sequence = 0;
+            this.APBox.Text = "";
+            this.ActionPoints = 0;
         }
 
         private void AddWeapon_Click(object sender, RoutedEventArgs e)

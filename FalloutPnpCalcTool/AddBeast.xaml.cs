@@ -23,6 +23,9 @@ namespace FalloutPnpCalcTool
     {
         public int Perception { get; set; }
         public int ArmorClass { get; set; }
+        public int MaxHitPoints { get; set; }
+        public int ActionPoints { get; set; }
+        public int Sequence { get; set; }
         public string BName { get; set; }
         public Beast Beast { get; set; }
         public List<Attack> Attacks { get; set; }
@@ -82,6 +85,10 @@ namespace FalloutPnpCalcTool
             this.PerceptionBox.Text = this.Perception.ToString();
             this.NameBox.Text = this.BName;
             this.ArmorClassBox.Text = this.ArmorClass.ToString();
+            this.APBox.Text = this.ActionPoints.ToString();
+            this.SequenceBox.Text = this.Sequence.ToString();
+            this.HPBox.Text = this.MaxHitPoints.ToString();
+
 
             StackPanel s = new StackPanel();
             foreach (Attack w in Beast.Attacks)
@@ -125,11 +132,14 @@ namespace FalloutPnpCalcTool
             this.Perception = beast.Perception;
             this.BName = beast.Name;
             this.ArmorClass = beast.ArmorClass;
+            this.MaxHitPoints = beast.MaxHitPoints;
+            this.Sequence = beast.Sequence;
+            this.ActionPoints = beast.ActionPoints;
         }
 
         private void SetValuesFromUI()
         {
-            int perception = 0, ac = 0;
+            int perception = 0, ac = 0, ap = 0, seq = 0, mhp = 0;
 
             if(int.TryParse(this.PerceptionBox.Text,out perception))
             {
@@ -141,6 +151,21 @@ namespace FalloutPnpCalcTool
                 this.ArmorClass = ac;
             }
 
+            if (int.TryParse(this.APBox.Text, out ap))
+            {
+                this.ActionPoints = ap;
+            }
+
+            if (int.TryParse(this.HPBox.Text, out mhp))
+            {
+                this.MaxHitPoints = mhp;
+            }
+
+            if (int.TryParse(this.SequenceBox.Text, out seq))
+            {
+                this.Sequence = seq;
+            }
+
             this.BName = this.NameBox.Text;
         }
 
@@ -149,6 +174,9 @@ namespace FalloutPnpCalcTool
             this.Beast.Perception = this.Perception;
             this.Beast.ArmorClass = this.ArmorClass;
             this.Beast.Name = this.BName;
+            this.Beast.Sequence = this.Sequence;
+            this.Beast.MaxHitPoints = this.MaxHitPoints;
+            this.Beast.ActionPoints = this.ActionPoints;
         }
 
         private void AddWeapon_Click(object sender, RoutedEventArgs e)
@@ -202,6 +230,12 @@ namespace FalloutPnpCalcTool
             this.BName = "";
             this.ArmorClassBox.Text = "";
             this.ArmorClass = 0;
+            this.APBox.Text = "";
+            this.ActionPoints = 0;
+            this.HPBox.Text = "";
+            this.MaxHitPoints = 0;
+            this.SequenceBox.Text = "";
+            this.Sequence = 0;
         }
     }
 }

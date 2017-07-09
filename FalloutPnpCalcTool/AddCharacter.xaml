@@ -56,6 +56,7 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -65,20 +66,29 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Label x:Name="SmallGunsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Small Guns</Label>
-                    <TextBox x:Name="SmallGunsBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Height="30" Text=""></TextBox>
-                    <Label x:Name="BigGunsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Big Guns</Label>
-                    <TextBox x:Name="BigGunsBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="3" Height="30" Text=""></TextBox>
-                    <Label x:Name="EnergyWeaponsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4">Energy Weapons</Label>
-                    <TextBox x:Name="EnergyWeaponsBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="5" Height="30" Text=""></TextBox>
-                    <Label x:Name="UnarmedLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">Unarmed</Label>
-                    <TextBox x:Name="UnarmedBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Height="30" Text=""></TextBox>
-                    <Label x:Name="MeleeLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2">Melee</Label>
-                    <TextBox x:Name="MeleeBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="3" Height="30" Text=""></TextBox>
-                    <Label x:Name="ThrownLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4">Thrown</Label>
-                    <TextBox x:Name="ThrownBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="5" Height="30" Text=""></TextBox>
-                    <Button x:Name="SaveButton" Click="SaveButton_Click" Grid.Row="2" Grid.Column="4">Save</Button>
-                    <Button x:Name="ClearButton" Click="ClearButton_Click" Grid.Row="2" Grid.Column="5">Clear</Button>
+                    <Label x:Name="SmallGunsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">Small Guns</Label>
+                    <TextBox x:Name="SmallGunsBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Height="30" Text=""></TextBox>
+                    <Label x:Name="BigGunsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="2">Big Guns</Label>
+                    <TextBox x:Name="BigGunsBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="3" Height="30" Text=""></TextBox>
+                    <Label x:Name="EnergyWeaponsLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4">Energy Weapons</Label>
+                    <TextBox x:Name="EnergyWeaponsBox" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="5" Height="30" Text=""></TextBox>
+                    
+                    <Label x:Name="UnarmedLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0">Unarmed</Label>
+                    <TextBox x:Name="UnarmedBox" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="1" Height="30" Text=""></TextBox>
+                    <Label x:Name="MeleeLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2">Melee</Label>
+                    <TextBox x:Name="MeleeBox" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="3" Height="30" Text=""></TextBox>
+                    <Label x:Name="ThrownLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="4">Thrown</Label>
+                    <TextBox x:Name="ThrownBox" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="5" Height="30" Text=""></TextBox>
+                    
+                    <Label x:Name="HPLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Max Hit Points</Label>
+                    <TextBox x:Name="HPBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Height="30" Text=""></TextBox>
+                    <Label x:Name="SequenceLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="2">Sequence</Label>
+                    <TextBox x:Name="SequenceBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="3" Height="30" Text=""></TextBox>
+                    <Label x:Name="APLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="4">Action Points</Label>
+                    <TextBox x:Name="APBox" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="5" Height="30" Text=""></TextBox>
+                    
+                    <Button x:Name="SaveButton" Click="SaveButton_Click" Grid.Row="3" Grid.Column="4">Save</Button>
+                    <Button x:Name="ClearButton" Click="ClearButton_Click" Grid.Row="3" Grid.Column="5">Clear</Button>
                  </Grid>
                 <Grid Grid.Row="3" x:Name="DamageGrid">
                     <Grid.RowDefinitions>

@@ -47,6 +47,8 @@ namespace FalloutPnpCalcTool
             List<Beast> b = new List<Beast>();
             List<Weapon> w = new List<Weapon>();
             List<Attack> a = new List<Attack>();
+            List<BattleObject> players = new List<BattleObject>();
+            List<BattleObject> enemies = new List<BattleObject>();
             Beings = new List<CompositeBeing>();
             Characters = new List<Character>();
             Beasts = new List<Beast>();
@@ -71,25 +73,56 @@ namespace FalloutPnpCalcTool
             Attacks = a.OrderBy(at => at.Name).ToList();
             AttackDate = DateTime.Now;
 
+
+            Random r = new Random();
             foreach(var item in c)
             {
+
+
                 CompositeBeing cb = new CompositeBeing();
                 cb.Name = item.Name;
                 cb.Type = item.GetType();
                 cb.Object = item;
+                cb.ID = item.CharacterID;
 
                 Beings.Add(cb);
+                //if( i < 4)
+                //{
+                //    BattleObject bo = new BattleObject();
+                //    bo.ID = Guid.NewGuid();
+                //    bo.AC = item.ArmorClass;
+                //    bo.ActionPoints = 8;
+                //    bo.MaxActionPoints = 8;
+                //    bo.CurrentHp = 30;
+                //    bo.Name = item.Name;
+                //    bo.Sequence = r.Next(1, 19);
+                //    bo.Type = item.GetType();
+                //    bo.Object = item;
+                //    bo.XCord = r.Next(0, 25);
+                //    bo.YCord = r.Next(0, 25);
+                //    players.Add(bo);
+                //}
+                
             }
 
             foreach(var item in b)
             {
+
                 CompositeBeing cb = new CompositeBeing();
                 cb.Name = item.Name;
+                cb.ID = item.ID;
                 cb.Type = item.GetType();
                 cb.Object = item;
 
                 Beings.Add(cb);
             }
+
+            //BattleSimulationEngine bse = new BattleSimulationEngine(players, enemies, 20);
+            //bse.RunEncounter();
+            //foreach(Result item in bse.Results.OrderBy(re => re.timeStamp))
+            //{
+            //    Console.WriteLine($"{item.text} {item.timeStamp.ToString("hh:mm:ss:fff")}");
+            //}
             Beings = Beings.OrderBy(bei => bei.Name).ToList();
             BeingDate = DateTime.Now;
         }

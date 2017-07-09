@@ -24,6 +24,8 @@ namespace FalloutPnpCalcTool
         public int WeaponDice { get; set; }
         public int WeaponModifier { get; set; }
         public int HitChance { get; set; }
+        public int APCost { get; set; }
+        public int RangeFeet { get; set; }
         public string AName { get; set; }
         public Attack Attack { get; set; }
         public bool Initializing { get; set; }
@@ -89,6 +91,8 @@ namespace FalloutPnpCalcTool
             this.ModifierBox.Text = this.WeaponModifier.ToString();
             this.HitChanceBox.Text = this.HitChance.ToString();
             this.NameBox.Text = this.AName;
+            this.APBox.Text = this.APCost.ToString();
+            this.RangeBox.Text = this.RangeFeet.ToString();
             this.Initializing = false;
         }
 
@@ -99,11 +103,13 @@ namespace FalloutPnpCalcTool
             this.WeaponModifier = attack.WeaponModifier;
             this.HitChance = attack.HitChance;
             this.AName = attack.Name;
+            this.APCost = attack.APCost;
+            this.RangeFeet = attack.RangeFeet;
         }
 
         public void SetValuesFromUI()
         {
-            int dice = 0, numDice = 0, hc = 0, Modifier = 0;
+            int dice = 0, numDice = 0, hc = 0, Modifier = 0, r = 0, ap = 0;
 
             if (int.TryParse(this.DiceBox.Text, out dice))
             {
@@ -124,6 +130,16 @@ namespace FalloutPnpCalcTool
             {
                 this.WeaponModifier = Modifier;
             }
+
+            if (int.TryParse(this.RangeBox.Text, out r))
+            {
+                this.RangeFeet = r;
+            }
+
+            if (int.TryParse(this.APBox.Text, out ap))
+            {
+                this.APCost = ap;
+            }
             this.AName = this.NameBox.Text;
         }
 
@@ -134,6 +150,8 @@ namespace FalloutPnpCalcTool
             this.Attack.WeaponDice = this.WeaponDice;
             this.Attack.WeaponModifier = this.WeaponModifier;
             this.Attack.Name = this.AName;
+            this.Attack.RangeFeet = this.RangeFeet;
+            this.Attack.APCost = this.APCost;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

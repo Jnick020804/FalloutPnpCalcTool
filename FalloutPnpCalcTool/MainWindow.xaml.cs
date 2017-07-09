@@ -475,6 +475,9 @@ namespace FalloutPnpCalcTool
             int me = 0;
             int ua = 0;
             int thr = 0;
+            int ap = 0;
+            int seq = 0;
+            int mhp = 0;
 
             Character c = new Character();
 
@@ -562,13 +565,40 @@ namespace FalloutPnpCalcTool
 
             c.Name = data[10];
 
+            if (int.TryParse(data[11], out ap))
+            {
+                c.ActionPoints = ap;
+            }
+            else
+            {
+                c.ActionPoints= ap;
+            }
+
+            if (int.TryParse(data[12], out seq))
+            {
+                c.Sequence = seq;
+            }
+            else
+            {
+                c.Sequence = seq;
+            }
+
+            if (int.TryParse(data[13], out mhp))
+            {
+                c.MaxHitPoints = mhp;
+            }
+            else
+            {
+                c.MaxHitPoints = mhp;
+            }
+
             App.Database.SaveCharacter(c);
         }
 
         public void AddWeapon(string[] data)
         {
             Guid id = Guid.Empty;
-            int dice = 0, numDice = 0, Range = 0, Modifier = 0, skill;
+            int dice = 0, numDice = 0, Range = 0, Modifier = 0, skill = 0, ap = 0;
             Weapon w = new Weapon();
 
             if(Guid.TryParse(data[1],out id))
@@ -627,6 +657,15 @@ namespace FalloutPnpCalcTool
 
             w.WeaponName = data[7];
 
+            if (int.TryParse(data[8], out ap))
+            {
+                w.APCost = ap;
+            }
+            else
+            {
+                w.APCost = ap;
+            }
+
             App.Database.SaveWeapon(w);
         }
 
@@ -657,7 +696,7 @@ namespace FalloutPnpCalcTool
         public void AddBeast(string [] data)
         {
             Guid id = Guid.Empty;
-            int perception = 0, ac = 0;
+            int perception = 0, ac = 0, ap = 0, seq = 0, mhp = 0;
 
             Beast b = new Beast();
 
@@ -691,13 +730,40 @@ namespace FalloutPnpCalcTool
 
             b.Name = data[4];
 
+            if (int.TryParse(data[5], out ap))
+            {
+                b.ActionPoints = ap;
+            }
+            else
+            {
+                b.ActionPoints = ap;
+            }
+
+            if (int.TryParse(data[6], out seq))
+            {
+                b.Sequence = seq;
+            }
+            else
+            {
+                b.Sequence = seq;
+            }
+
+            if (int.TryParse(data[7], out mhp))
+            {
+                b.MaxHitPoints = mhp;
+            }
+            else
+            {
+                b.MaxHitPoints = mhp;
+            }
+
             App.Database.SaveBeast(b);
         }
 
         public void AddAttack(string [] data)
         {
             Guid id = Guid.Empty;
-            int dice = 0, numDice = 0, hc = 0, Modifier = 0;
+            int dice = 0, numDice = 0, hc = 0, Modifier = 0, ap = 0, r = 0;
             Attack a = new Attack();
 
             if(Guid.TryParse(data[1],out id))
@@ -748,6 +814,26 @@ namespace FalloutPnpCalcTool
             }
             a.Name = data[6];
 
+            if (int.TryParse(data[7], out ap))
+            {
+                a.APCost = ap;
+            }
+            else
+            {
+                a.APCost = ap;
+
+            }
+
+            if (int.TryParse(data[8], out r))
+            {
+                a.RangeFeet = r;
+            }
+            else
+            {
+                a.RangeFeet = r;
+
+            }
+
             App.Database.SaveAttack(a);
         }
 
@@ -789,12 +875,12 @@ namespace FalloutPnpCalcTool
 
             foreach (Character c in this.Characters)
             {
-                csv.AppendLine($"0,{c.CharacterID},{c.Perception},{c.ArmorClass},{c.SmallGuns},{c.BigGuns},{c.EnergyWeapons},{c.Melee},{c.Unarmed},{c.Thrown},{c.Name}");
+                csv.AppendLine($"0,{c.CharacterID},{c.Perception},{c.ArmorClass},{c.SmallGuns},{c.BigGuns},{c.EnergyWeapons},{c.Melee},{c.Unarmed},{c.Thrown},{c.Name},{c.ActionPoints},{c.Sequence},{c.MaxHitPoints}");
             }
 
             foreach (Weapon w in this.Weapons)
             {
-                csv.AppendLine($"1,{w.ID},{w.WeaponDice},{w.NumberOfDice},{w.RangeFeet},{w.WeaponModifier},{w.skill},{w.WeaponName}");
+                csv.AppendLine($"1,{w.ID},{w.WeaponDice},{w.NumberOfDice},{w.RangeFeet},{w.WeaponModifier},{w.skill},{w.WeaponName},{w.APCost}");
             }
 
             foreach(PlayerWeapon item in pw)
@@ -804,12 +890,12 @@ namespace FalloutPnpCalcTool
             
             foreach(Beast b in this.Beasts)
             {
-                csv.AppendLine($"3,{b.ID},{b.Perception},{b.ArmorClass},{b.Name}");
+                csv.AppendLine($"3,{b.ID},{b.Perception},{b.ArmorClass},{b.Name},{b.ActionPoints},{b.Sequence},{b.MaxHitPoints}");
             }
 
             foreach(Attack a in this.Attacks)
             {
-                csv.AppendLine($"4,{a.ID},{a.WeaponDice},{a.NumberOfDice},{a.HitChance},{a.WeaponModifier},{a.Name}");
+                csv.AppendLine($"4,{a.ID},{a.WeaponDice},{a.NumberOfDice},{a.HitChance},{a.WeaponModifier},{a.Name},{a.APCost},{a.RangeFeet}");
             }
 
             foreach(BeastAttack item in ba)
@@ -841,6 +927,12 @@ namespace FalloutPnpCalcTool
             {
 
             }
+        }
+
+        private void BattleSimulator_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = new EncounterSimulator();
+            w.Show();
         }
     }
 
