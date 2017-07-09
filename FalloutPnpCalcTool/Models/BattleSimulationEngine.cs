@@ -15,7 +15,14 @@ namespace FalloutPnpCalcTool.Models
         {
             get
             {
-                return $"{text} {timeStamp.ToString("hh:mm:ss:fff")}";
+                if (timeStamp == DateTime.MaxValue)
+                {
+                    return $"{text}";
+                }
+                else
+                {
+                    return $"{text} {timeStamp.ToString("hh:mm:ss:fff")}";
+                }
             }
         }
 
@@ -33,6 +40,8 @@ namespace FalloutPnpCalcTool.Models
         List<BattleObject> TurnOrder { get; set; }
         int LightPenalty { get; set; }
         public List<Result> Results { get; set; }
+        public List<Result> PlayerDeaths { get; set; }
+        public List<Result> EnemyDeaths { get; set; }
         BattleObject current { get; set; }
         public List<Attack> currentAttack { get; set; }
         public List<Weapon> currentWeapon { get; set; }
@@ -48,6 +57,8 @@ namespace FalloutPnpCalcTool.Models
             EnemyTeam = new List<BattleObject>();
             TurnOrder = new List<BattleObject>();
             Results = new List<Result>();
+            PlayerDeaths = new List<Result>();
+            EnemyDeaths = new List<Result>();
 
             EnemyTeam = enemies;
             PlayerTeam = players;
@@ -346,11 +357,14 @@ namespace FalloutPnpCalcTool.Models
                 {
                     int index = PlayerTeam.IndexOf(PlayerTeam.First(e => e.ID == target.Target.ID));
                     PlayerTeam.RemoveAt(index);
+                    PlayerDeaths.Add(new Result($"{target.Target.Name} was killed by {current.Name}", DateTime.Now));
+
                 }
                 else
                 {
                     int index = EnemyTeam.IndexOf(EnemyTeam.First(e => e.ID == target.Target.ID));
                     EnemyTeam.RemoveAt(index);
+                    EnemyDeaths.Add(new Result($"{target.Target.Name} was killed by {current.Name}", DateTime.Now));
                 }
                 currentTarget = null;
                 SetComparisions();
@@ -396,11 +410,13 @@ namespace FalloutPnpCalcTool.Models
                 {
                     int index = PlayerTeam.IndexOf(PlayerTeam.First(e => e.ID == target.Target.ID));
                     PlayerTeam.RemoveAt(index);
+                    PlayerDeaths.Add(new Result($"{target.Target.Name} was killed by {current.Name}", DateTime.Now));
                 }
                 else
                 {
                     int index = EnemyTeam.IndexOf(EnemyTeam.First(e => e.ID == target.Target.ID));
                     EnemyTeam.RemoveAt(index);
+                    EnemyDeaths.Add(new Result($"{target.Target.Name} was killed by {current.Name}", DateTime.Now));
                 }
                 currentTarget = null;
 
@@ -420,11 +436,17 @@ namespace FalloutPnpCalcTool.Models
             }
             if (PlayerTeam.Count == 0)
             {
-                this.Results.Add(new Result("Enemies Win", DateTime.Now));
+                this.Results.Add(new Result($"---------- Enemies Win ----------\n\r\n\r", DateTime.MaxValue));
             }
             else
             {
-                this.Results.Add(new Result("Players Win", DateTime.Now));
+                this.Results.Add(new Result($"---------- Players Win ----------\n\r\n\r", DateTime.MaxValue));
+            }
+            this.Results.Add(new Result($"{PlayerDeaths.Count} Players Died", DateTime.MaxValue));
+            foreach(var item in PlayerDeaths)
+            {
+                Result r = new Result(item.text,DateTime.MaxValue);
+                this.Results.Add(r);
             }
         }
 
